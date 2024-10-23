@@ -9,7 +9,11 @@ set("strictQuery", true);
 
 export const dbconnect = async () => {
   try {
-    connect(process.env.MONGO_URI);
+    connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000,
+    });
     await seedUsers();
     await seedFoods();
     console.log("connect successfully---");
